@@ -1,0 +1,1 @@
+select 'COMMENT ON column ' ||TABLE_NAME || '.' || COLUMN_NAME || ' is ''' || COMMENTS || ''';'  from USER_COL_COMMENTS where table_name=? and comments is not null

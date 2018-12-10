@@ -1,0 +1,1 @@
+select dbms_metadata.get_ddl('INDEX', INDEX_NAME) || ';' from user_indexes where table_name=?
