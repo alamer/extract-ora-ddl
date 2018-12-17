@@ -16,8 +16,6 @@ import java.sql.SQLException;
 public class App {
 
 
-
-
     public static void main(String[] args) throws SQLException, ClassNotFoundException, IOException {
 
         Args args1 = new Args();
@@ -39,6 +37,17 @@ public class App {
             }
         }
 
+        if (args1.getViewNames() != null) {
+            String[] views = args1.getViewNames().split(",");
+            for (String tableName : tables) {
+                OracleExportController exportController = new OracleExportController(login, password, server);
+                String resultString = exportController.exportDdlByViewName(tableName);
+                Path path = Paths.get("out/view/" + tableName + "_DDL.sql");
+                try (BufferedWriter writer = Files.newBufferedWriter(path)) {
+                    writer.write(resultString);
+                }
+            }
 
+        }
     }
 }
